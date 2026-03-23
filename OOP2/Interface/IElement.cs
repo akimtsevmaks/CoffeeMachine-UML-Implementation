@@ -7,6 +7,6 @@ namespace CoffeeMachine.Interface
     internal interface IElement
     {
         string Description { get; }
-        string GetActionStep();
+        string GetActionStep(int depth = 0);
     }
 }

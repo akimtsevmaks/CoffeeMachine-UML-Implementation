@@ -13,6 +13,6 @@ namespace CoffeeMachine.Ingredients
         protected abstract string Name { get; }
         protected abstract string Unit { get; }
 
-        public string GetActionStep() => Description;
+        public string GetActionStep(int depth = 0) => $"{new(' ', depth * 4)}- {Description}";
     }
 }
