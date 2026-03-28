@@ -6,5 +6,16 @@ namespace CoffeeMachine.Drink
 {
     internal class DrinkStorage
     {
+        private readonly List<Drink> _drinks = [];
+        public IReadOnlyList<Drink> Drinks => _drinks;
+
+        public void Add(Drink drink) => _drinks.Add(drink);
+
+        public void removeAt(int index)
+        {
+            if (index < 0 || index >= _drinks.Count)
+                throw new ArgumentOutOfRangeException(nameof(index), "index out");
+            _drinks.RemoveAt(index);
+        }
     }
 }
