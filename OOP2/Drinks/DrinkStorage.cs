@@ -14,8 +14,8 @@ namespace CoffeeMachine.Drinks
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= _drinks.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "index out");          // eh
-            _drinks.RemoveAt(index);
+                ErrorHandler.ShowError("Индекс вне границ массива");
+            else _drinks.RemoveAt(index);
         }
     }
 }

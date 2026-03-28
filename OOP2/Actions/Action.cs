@@ -7,7 +7,7 @@ namespace CoffeeMachine.Actions
 {
     abstract internal class Action : IElement
     {
-        private readonly List<IElement> _elements;
+        private readonly List<IElement> _elements = [];
         public IReadOnlyList<IElement> Elements => _elements;
 
         protected abstract string ActionName { get; }
@@ -19,8 +19,8 @@ namespace CoffeeMachine.Actions
         }
         protected Action(params IElement[] elements)
         {
-            if (elements == null || elements.Length == 0) throw new ArgumentException("empty action");            // eh
-            _elements = [.. elements];
+            if (elements == null || elements.Length == 0) ErrorHandler.ShowError("Пустой массив действий");
+            else _elements = [.. elements];
         }
 
         public static Action CreateRoot() => new RootAction();
@@ -32,20 +32,21 @@ namespace CoffeeMachine.Actions
 
         public void AddElement(IElement element, int index = -1)
         {
-            if (element == null) throw new ArgumentException("empty action");              // eh
-
-            if (index == -1 || index >= _elements.Count)
-                _elements.Add(element);
+            if (element == null) ErrorHandler.ShowError("Нет элемента для добавления");
             else
-                _elements.Insert(index, element);
+            {
+                if (index == -1 || index >= _elements.Count)
+                    _elements.Add(element);
+                else
+                    _elements.Insert(index, element);
+            }
         }
 
         public void RemoveElementAt(int index)
         {
             if (index <  0 || index >= _elements.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "idex out");            // eh
-
-            _elements.RemoveAt(index);
+                ErrorHandler.ShowError("Индекс вне границ массива");
+            else _elements.RemoveAt(index);
         }
 
         public virtual string GetActionStep(int depth = 0)

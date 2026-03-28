@@ -40,8 +40,8 @@ namespace CoffeeMachine
                     case "2": CreateDrink(); break;
                     case "3": EditDrink(); break;
                     case "4": DeleteDrink(); break;
-                    case "0": break;
-                    default: break;
+                    case "0": return;
+                    default: ErrorHandler.ShowError("Некорректный ввод"); break;
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace CoffeeMachine
 
             if (string.IsNullOrEmpty(name))
             {
-                // eh
+                ErrorHandler.ShowError("Пустое имя");
                 return;
             }
 
@@ -113,7 +113,7 @@ namespace CoffeeMachine
                             break;
                         }
                     case "0": return;
-                    default: break; // eh
+                    default: ErrorHandler.ShowError("Некорретный ввод"); break;
                 }
             }
         }
@@ -172,12 +172,13 @@ namespace CoffeeMachine
                             break;
                         }
                     case "0": filling = false; break;
-                    default: break;                                  //eh
+                    default: ErrorHandler.ShowError("Некорректный ввод"); break;
                 }
             }
+
             if (collected.Count == 0)
             {
-                //eh
+                ErrorHandler.ShowError("Пустое действие");
                 return null;
             }
 
@@ -210,7 +211,7 @@ namespace CoffeeMachine
             
             if (!double.TryParse(Console.ReadLine()?.Trim() ?? "", out double weight) || weight <= 0)
             {
-                // eh
+                ErrorHandler.ShowError("Некорректный ввод");
                 return null;
             }
 
@@ -232,7 +233,7 @@ namespace CoffeeMachine
 
             if (drinks.Count == 0)
             {
-                // eh
+                ErrorHandler.ShowError("Напитков нет");
                 return;
             }
 
@@ -242,7 +243,7 @@ namespace CoffeeMachine
 
             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int idx) | idx < 1 || idx > drinks.Count)
             {
-                // eh
+                ErrorHandler.ShowError("Некорректный ввод");
                 return;
             }
 
@@ -268,7 +269,7 @@ namespace CoffeeMachine
 
                             if (string.IsNullOrEmpty(name))
                             {
-                                // eh
+                                ErrorHandler.ShowError("Пустое имя");
                                 return;
                             }
                             drink.SetName(name);
@@ -284,13 +285,13 @@ namespace CoffeeMachine
                         {
                             if (drink.Steps.Count == 0)
                             {
-                                // eh
+                                ErrorHandler.ShowError("Напитков нет");
                                 break;
                             }
                             Console.WriteLine(" Введите номер для вставки: ");
                             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int insIdx) | insIdx < 1 || insIdx > drinks.Count)
                             {
-                                // eh
+                                ErrorHandler.ShowError("Некорректный ввод");
                                 return;
                             }
                             var action = GetAction();
@@ -301,13 +302,13 @@ namespace CoffeeMachine
                         {
                             if (drink.Steps.Count == 0)
                             {
-                                // eh
+                                ErrorHandler.ShowError("Напитков нет");
                                 break;
                             }
                             Console.WriteLine(" Введите номер для удаления: ");
                             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int delIdx) | delIdx < 1 || delIdx > drinks.Count)
                             {
-                                // eh
+                                ErrorHandler.ShowError("Некорректный ввод");
                                 return;
                             }
                             drink.RemoveStep(delIdx);
@@ -316,7 +317,7 @@ namespace CoffeeMachine
                     case "0": return;
                     default:
                         {
-                            // eh
+                            ErrorHandler.ShowError("Некорректный ввод");
                             break;
                         }
                 }
@@ -330,7 +331,7 @@ namespace CoffeeMachine
 
             if (drinks.Count == 0)
             {
-                // eh
+                ErrorHandler.ShowError("Напитков нет");
                 return;
             }
 
