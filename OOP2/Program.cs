@@ -206,7 +206,7 @@ namespace CoffeeMachine
             Console.Write("\n Введите ингредиент: ");
             string choice = Console.ReadLine()?.Trim() ?? "";
 
-            Console.Write("Введите кол-во: ");
+            Console.Write(" Введите кол-во: ");
             
             if (!double.TryParse(Console.ReadLine()?.Trim() ?? "", out double weight) || weight <= 0)
             {
