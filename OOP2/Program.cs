@@ -30,7 +30,7 @@ namespace CoffeeMachine
                 Console.WriteLine("║  0 Выход                     ║");
                 Console.WriteLine("╚══════════════════════════════╝");
 
-                Console.WriteLine("\n Введите действие: ");
+                Console.Write("\n Введите действие: ");
 
                 switch (Console.ReadLine()?.Trim() ?? "")
                 {
@@ -68,7 +68,7 @@ namespace CoffeeMachine
         {
             Console.Clear();
 
-            Console.WriteLine("Введите название напитка: ");
+            Console.Write("Введите название напитка: ");
             string name = Console.ReadLine()?.Trim() ?? "";
 
             if (string.IsNullOrEmpty(name))
@@ -100,7 +100,7 @@ namespace CoffeeMachine
                 Console.WriteLine("  1 Действие");
                 Console.WriteLine("  0 Завершить");
 
-                Console.WriteLine("\n Введите действие: ");
+                Console.Write("\n Введите действие: ");
 
                 switch (Console.ReadLine()?.Trim() ?? "")
                 {
@@ -126,7 +126,7 @@ namespace CoffeeMachine
             Console.WriteLine("  5 Пролить");
             Console.WriteLine("  6 Перемешать");
 
-            Console.WriteLine("\n Введите действие: ");
+            Console.Write("\n Введите действие: ");
 
             string choice = Console.ReadLine()?.Trim() ?? "";
 
@@ -153,7 +153,7 @@ namespace CoffeeMachine
                 Console.WriteLine("  2 Действие");
                 Console.WriteLine("  0 Завершить");
 
-                Console.WriteLine("\n Введите действие: ");
+                Console.Write("\n Введите действие: ");
 
                 switch (Console.ReadLine()?.Trim() ?? "")
                 {
@@ -203,10 +203,10 @@ namespace CoffeeMachine
             Console.WriteLine("  4 Сироп (мл)");
             Console.WriteLine("  5 Вода (мл)");
 
-            Console.WriteLine("\n Введите ингредиент: ");
+            Console.Write("\n Введите ингредиент: ");
             string choice = Console.ReadLine()?.Trim() ?? "";
 
-            Console.WriteLine("Введите кол-во: ");
+            Console.Write("Введите кол-во: ");
             
             if (!double.TryParse(Console.ReadLine()?.Trim() ?? "", out double weight) || weight <= 0)
             {
@@ -238,7 +238,7 @@ namespace CoffeeMachine
 
             PrintDrinkNames(drinks);
 
-            Console.WriteLine("Введите номер редактируемого напитка: ");
+            Console.Write("Введите номер редактируемого напитка: ");
 
             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int idx) || idx < 1 || idx > drinks.Count)
             {
@@ -257,13 +257,13 @@ namespace CoffeeMachine
                 Console.WriteLine("  4 Удалить действие в рецепте по номеру");
                 Console.WriteLine("  0 Назад");
 
-                Console.WriteLine("\n Введите действие: ");
+                Console.Write("\n Введите действие: ");
 
                 switch (Console.ReadLine()?.Trim() ?? "")
                 {
                     case "1":
                         {
-                            Console.WriteLine("Введите название напитка: ");
+                            Console.Write("Введите название напитка: ");
                             string name = Console.ReadLine()?.Trim() ?? "";
 
                             if (string.IsNullOrEmpty(name))
@@ -287,7 +287,7 @@ namespace CoffeeMachine
                                 ErrorHandler.ShowError("Напитков нет");
                                 break;
                             }
-                            Console.WriteLine(" Введите номер для вставки: ");
+                            Console.Write(" Введите номер для вставки: ");
                             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int insIdx) || insIdx < 1 || insIdx > drink.Steps.Count)
                             {
                                 ErrorHandler.ShowError("Некорректный ввод");
@@ -304,7 +304,7 @@ namespace CoffeeMachine
                                 ErrorHandler.ShowError("Напитков нет");
                                 break;
                             }
-                            Console.WriteLine(" Введите номер для удаления: ");
+                            Console.Write(" Введите номер для удаления: ");
                             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int delIdx) || delIdx < 1 || delIdx > drink.Steps.Count)
                             {
                                 ErrorHandler.ShowError("Некорректный ввод");
@@ -335,7 +335,7 @@ namespace CoffeeMachine
             }
 
             PrintDrinkNames(drinks);
-            Console.WriteLine("Введите номер удаляемого напитка: ");
+            Console.Write("Введите номер удаляемого напитка: ");
             if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int idx) || idx < 1 || idx > drinks.Count)
             {
                 ErrorHandler.ShowError("Некорректный ввод");
