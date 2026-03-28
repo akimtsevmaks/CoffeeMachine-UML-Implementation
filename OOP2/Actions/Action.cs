@@ -13,10 +13,39 @@ namespace CoffeeMachine.Actions
         protected abstract string ActionName { get; }
         public string Description => ActionName;
 
+        protected Action()
+        {
+            _elements = [];
+        }
         protected Action(params IElement[] elements)
         {
             if (elements == null || elements.Length == 0) throw new ArgumentException("empty action");
             _elements = [.. elements];
+        }
+
+        public static Action CreateRoot() => new RootAction();
+
+        private sealed class RootAction : Action
+        {
+            protected override string ActionName => "Рецепт";
+        }
+
+        public void AddElement(IElement element, int index = -1)
+        {
+            if (element == null) throw new ArgumentException("empty action");
+
+            if (index == -1 || index >= _elements.Count)
+                _elements.Add(element);
+            else
+                _elements.Insert(index, element);
+        }
+
+        public void RemoveElementAt(int index)
+        {
+            if (index <  0 || index >= _elements.Count)
+                throw new ArgumentOutOfRangeException(nameof(index), "idex out");
+
+            _elements.RemoveAt(index);
         }
 
         public virtual string GetActionStep(int depth = 0)
