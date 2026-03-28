@@ -19,8 +19,7 @@ namespace CoffeeMachine.Actions
         }
         protected Action(params IElement[] elements)
         {
-            if (elements == null || elements.Length == 0) ErrorHandler.ShowError("Пустой массив действий");
-            else _elements = [.. elements];
+            _elements = [.. elements];
         }
 
         public static Action CreateRoot() => new RootAction();

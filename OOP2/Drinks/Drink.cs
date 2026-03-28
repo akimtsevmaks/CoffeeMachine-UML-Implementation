@@ -1,9 +1,11 @@
 ﻿using CoffeeMachine.Interface;
+using CoffeeMachine;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 using Action = CoffeeMachine.Actions.Action;
+
 
 namespace CoffeeMachine.Drinks
 {
@@ -33,8 +35,7 @@ namespace CoffeeMachine.Drinks
             for (int i = 0; i < children.Count; i++)
             {
                 string step = children[i].GetActionStep(1);
-                sb.Append($"    {i + 1}) ");
-                sb.Append(step.AsSpan(4));
+                sb.AppendLine($"    {i + 1}) {step.AsSpan(4)}");
             }
             return sb.ToString().TrimEnd();
         }
