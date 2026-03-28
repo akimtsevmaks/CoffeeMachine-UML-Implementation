@@ -38,7 +38,7 @@ namespace CoffeeMachine
                 {
                     case "1": ShowDrinks(); break;
                     case "2": CreateDrink(); break;
-                    case "3": break;
+                    case "3": EditDrink(); break;
                     case "4": DeleteDrink(); break;
                     case "0": break;
                     default: break;
@@ -140,7 +140,16 @@ namespace CoffeeMachine
             bool filling = true;
             while (filling)
             {
-                Console.WriteLine($"\n Добавить в текущий шаг \"{choice}\"");
+                Console.WriteLine($"\n Добавить в текущий шаг \"{choice switch
+                {
+                    "1" => "Добавить",
+                    "2" => "Вскипятить",
+                    "3" => "Взбить",
+                    "4" => "Перемолоть",
+                    "5" => "Пролить",
+                    "6" => "Перемешать",
+                    _ => ""
+                }}\"");
 
                 Console.WriteLine("  1 Ингредиент");
                 Console.WriteLine("  2 Действие");
@@ -214,6 +223,104 @@ namespace CoffeeMachine
                 "5" => new Water(weight),
                 _ => null,
             };
+        }
+
+        static void EditDrink()
+        {
+            Console.Clear();
+            var drinks = _storage.Drinks;
+
+            if (drinks.Count == 0)
+            {
+                // eh
+                return;
+            }
+
+            PrintDrinkNames(drinks);
+
+            Console.WriteLine("Введите номер редактируемого напитка: ");
+
+            if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int idx) | idx < 1 || idx > drinks.Count)
+            {
+                // eh
+                return;
+            }
+
+            var drink = drinks[idx];
+
+            while (true)
+            {
+                Console.WriteLine("\n Возможные действия:");
+                Console.WriteLine("  1 Изменить название");
+                Console.WriteLine("  2 Добавить действие в конец рецепта");
+                Console.WriteLine("  3 Добавить действие в рецепт по номеру");
+                Console.WriteLine("  4 Удалить действие в рецепте по номеру");
+                Console.WriteLine("  0 Назад");
+
+                Console.WriteLine("\n Введите действие: ");
+
+                switch (Console.ReadLine()?.Trim() ?? "")
+                {
+                    case "1":
+                        {
+                            Console.WriteLine("Введите название напитка: ");
+                            string name = Console.ReadLine()?.Trim() ?? "";
+
+                            if (string.IsNullOrEmpty(name))
+                            {
+                                // eh
+                                return;
+                            }
+                            drink.SetName(name);
+                            break;
+                        }
+                    case "2":
+                        {
+                            var action = GetAction();
+                            if (action != null) drink.AddStep(action);
+                            break;
+                        }
+                    case "3":
+                        {
+                            if (drink.Steps.Count == 0)
+                            {
+                                // eh
+                                break;
+                            }
+                            Console.WriteLine(" Введите номер для вставки: ");
+                            if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int insIdx) | insIdx < 1 || insIdx > drinks.Count)
+                            {
+                                // eh
+                                return;
+                            }
+                            var action = GetAction();
+                            if (action != null) drink.AddStep(action, insIdx);
+                            break;
+                        }
+                    case "4":
+                        {
+                            if (drink.Steps.Count == 0)
+                            {
+                                // eh
+                                break;
+                            }
+                            Console.WriteLine(" Введите номер для удаления: ");
+                            if (!int.TryParse(Console.ReadLine()?.Trim() ?? "", out int delIdx) | delIdx < 1 || delIdx > drinks.Count)
+                            {
+                                // eh
+                                return;
+                            }
+                            drink.RemoveStep(delIdx);
+                            break;
+                        }
+                    case "0": return;
+                    default:
+                        {
+                            // eh
+                            break;
+                        }
+                }
+            }
         }
 
         static void DeleteDrink()

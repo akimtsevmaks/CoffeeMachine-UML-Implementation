@@ -7,20 +7,15 @@ using Action = CoffeeMachine.Actions.Action;
 
 namespace CoffeeMachine.Drinks
 {
-    internal class Drink
+    internal class Drink(string name)
     {
-        public string Name { get; }
+        public string Name { get; private set; } = name;
 
-        private readonly IElement _root;
+        private readonly IElement _root = Action.CreateRoot();
 
         private Action Root => (Action)_root;
 
-        public Drink(string name)
-        {
-            Name = name;
-            _root = Action.CreateRoot();
-        }
-
+        public void SetName(string name) => Name = name;
         public IReadOnlyList<IElement> Steps => Root.Elements;
 
         public void AddStep(IElement step, int index = -1) =>
@@ -38,8 +33,8 @@ namespace CoffeeMachine.Drinks
             for (int i = 0; i < children.Count; i++)
             {
                 string step = children[i].GetActionStep(1);
-                sb.Append($"\t{i + 1}) ");
-                sb.Append(step.Substring(4));
+                sb.Append($"    {i + 1}) ");
+                sb.Append(step.AsSpan(4));
             }
             return sb.ToString().TrimEnd();
         }

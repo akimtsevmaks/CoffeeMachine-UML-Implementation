@@ -11,7 +11,7 @@ namespace CoffeeMachine.Drinks
 
         public void Add(Drink drink) => _drinks.Add(drink);
 
-        public void removeAt(int index)
+        public void RemoveAt(int index)
         {
             if (index < 0 || index >= _drinks.Count)
                 throw new ArgumentOutOfRangeException(nameof(index), "index out");          // eh
