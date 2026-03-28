@@ -19,7 +19,7 @@ namespace CoffeeMachine.Actions
         }
         protected Action(params IElement[] elements)
         {
-            if (elements == null || elements.Length == 0) throw new ArgumentException("empty action");
+            if (elements == null || elements.Length == 0) throw new ArgumentException("empty action");            // eh
             _elements = [.. elements];
         }
 
@@ -32,7 +32,7 @@ namespace CoffeeMachine.Actions
 
         public void AddElement(IElement element, int index = -1)
         {
-            if (element == null) throw new ArgumentException("empty action");
+            if (element == null) throw new ArgumentException("empty action");              // eh
 
             if (index == -1 || index >= _elements.Count)
                 _elements.Add(element);
@@ -43,7 +43,7 @@ namespace CoffeeMachine.Actions
         public void RemoveElementAt(int index)
         {
             if (index <  0 || index >= _elements.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "idex out");
+                throw new ArgumentOutOfRangeException(nameof(index), "idex out");            // eh
 
             _elements.RemoveAt(index);
         }

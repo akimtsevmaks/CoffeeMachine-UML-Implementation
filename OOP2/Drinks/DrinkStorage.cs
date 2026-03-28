@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoffeeMachine.Drink
+namespace CoffeeMachine.Drinks
 {
     internal class DrinkStorage
     {
@@ -14,7 +14,7 @@ namespace CoffeeMachine.Drink
         public void removeAt(int index)
         {
             if (index < 0 || index >= _drinks.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "index out");
+                throw new ArgumentOutOfRangeException(nameof(index), "index out");          // eh
             _drinks.RemoveAt(index);
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 using Action = CoffeeMachine.Actions.Action;
 
-namespace CoffeeMachine.Drink
+namespace CoffeeMachine.Drinks
 {
     internal class Drink
     {
@@ -38,7 +38,7 @@ namespace CoffeeMachine.Drink
             for (int i = 0; i < children.Count; i++)
             {
                 string step = children[i].GetActionStep(1);
-                sb.Append($"\t[{i}] ");
+                sb.Append($"\t{i + 1}) ");
                 sb.Append(step.Substring(4));
             }
             return sb.ToString().TrimEnd();
