@@ -130,6 +130,13 @@ namespace CoffeeMachine
 
             string choice = Console.ReadLine()?.Trim() ?? "";
 
+            string[] acceptableChoices = { "1", "2", "3", "4", "5", "6" };
+            if (!acceptableChoices.Contains(choice))
+            {
+                ErrorHandler.ShowError("Некорректный ввод");
+                return null;
+            }
+
             List<IElement> collected = [];
 
             Console.WriteLine("\n\n Заполните содержимое действия:");
@@ -206,6 +213,12 @@ namespace CoffeeMachine
             Console.Write("\n Введите ингредиент: ");
             string choice = Console.ReadLine()?.Trim() ?? "";
 
+            string[] acceptableChoices = { "1", "2", "3", "4", "5" };
+            if (!acceptableChoices.Contains(choice))
+            {
+                ErrorHandler.ShowError("Некорректный ввод");
+                return null;
+            }
             Console.Write(" Введите кол-во: ");
             
             if (!double.TryParse(Console.ReadLine()?.Trim() ?? "", out double weight) || weight <= 0)
